@@ -1,10 +1,37 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MTk0ODIwNCwiZXhwIjoxOTU3NTI0MjA0fQ.jqvK0NeN6qBna_UCyT_2jgahLwFZ0_I-7T3QMQHJhvo';
+
+const SUPABASE_URL = 'https://nvkeilaiioresqjruzbf.supabase.co';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export async function getUser() {
     return client.auth.session();
+}
+
+export async function getWorkshops() {
+    const response = await client
+        .from('workshops')
+        .select('*, participants (*)');
+    
+    return checkError(response);    
+}
+
+export async function deleteParticipant(id) {
+    const response = await client 
+        .from('participants')
+        .delete()
+        .match({ id: id })
+        .single();
+
+    return checkError(response);
+}
+
+export async function createPartiipant(participant) {
+    const response = await client
+        .from('participants ')
+        .insert(participant);
+
+    return checkError(response); 
 }
 
 

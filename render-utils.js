@@ -1,8 +1,8 @@
-export function renderParticipant(particiant) {
+export function renderParticipant(participant) {
     const particiantEl = document.createElement('p');
     const particiantCard = document.createElement('div');
 
-    particiantEl.textContent = particiant.name;
+    particiantEl.textContent = participant.name;
     particiantEl.classList.add('participant');
 
     particiantCard.append(particiantEl);

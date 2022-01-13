@@ -6,7 +6,7 @@ import {
 
 } from '../fetch-utils.js';
 
-import { renderParticipant } from '../render-utils';
+import { renderParticipant } from '../render-utils.js';
 
 checkAuth();
 
@@ -19,7 +19,7 @@ logoutButton.addEventListener('click', () => {
 
 async function displayWorkshops() {
     const workshops = await getWorkshops();
-
+    console.log(workshops);
     workshopsEl.textContent = '';
     for (let workshop of workshops) {
 
@@ -28,18 +28,18 @@ async function displayWorkshops() {
         const participantsEl = document.createElement('div');
 
         workshopInfo.classList.add('workshop');
-        participantsEl.classList.add('particiant');
+        participantsEl.classList.add('participant');
 
         nameEl.textContent = workshop.name;
         workshopInfo.append(nameEl, participantsEl);
 
-        for (let particiant of workshop.particiants) {
-            const particiantEl = renderParticipant(particiant);
-            particiantEl.addEventListener('click', async() => {
-                await deleteParticipant(particiant.id);
-                displayWorkshops();
+        for (let participant of workshop.participants) {
+            const participantEl = renderParticipant(participant);
+            participantEl.addEventListener('click', async() => {
+                await deleteParticipant(participant.id);
+                await displayWorkshops();
             });
-            participantsEl.append(particiantEl);
+            participantsEl.append(participantEl);
             workshopInfo.append(participantsEl);
         }
         workshopsEl.append(workshopInfo);
@@ -47,7 +47,7 @@ async function displayWorkshops() {
 }
 
 window.addEventListener('load', async() => {
-    const workshops = await getWorkshops();
+    //const workshops = await getWorkshops();
 
-    displayWorkshops(workshops);
+    displayWorkshops();
 });

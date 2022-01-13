@@ -20,7 +20,7 @@ logoutButton.addEventListener('click', () => {
 async function displayWorkshops() {
     const workshops = await getWorkshops();
 
-    participantsEl.textContent = '';
+    workshopsEl.textContent = '';
     for (let workshop of workshops) {
 
         const workshopInfo = document.createElement('div');

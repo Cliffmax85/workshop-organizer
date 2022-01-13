@@ -26,7 +26,7 @@ export async function deleteParticipant(id) {
     return checkError(response);
 }
 
-export async function createPartiipant(participant) {
+export async function createPartipant(participant) {
     const response = await client
         .from('participants ')
         .insert(participant);
